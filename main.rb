@@ -1,11 +1,15 @@
 class Brave
 
+  
   # initializeメソッドを定義
-  def initialize
-    @name = "テリー"
-    @hp = 500
-    @offense = 150
-    @defense = 100
+  #paramsで一括で受け取る
+  #引数に**を記載:ハッシュしか受け取れなくなる
+  def initialize(**params)
+    #各パラメータをハッシュで取得
+    @name = params[:name]
+    @hp = params[:hp]
+    @offense = params[:offense]
+    @defense = params[:defense]
   end
 
   # nameのゲッター
@@ -29,7 +33,7 @@ class Brave
   end
 end
 
-brave = Brave.new
+brave = Brave.new(name:"テリー", hp:500, offense:150, defense:100)
 
 puts <<~TEXT
 NAME:#{brave.name}
