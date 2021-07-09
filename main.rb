@@ -70,9 +70,9 @@ class Brave
 
     # attack_typeを用いて攻撃処理を振り分け
    if attack_type == "special_attack"
-    calculate_special_attack - monster.defense
+    calculate_special_attack - target.defense
    else
-    @offense - monster.defense
+    @offense - target.defense
    end
   end
 
@@ -87,8 +87,8 @@ class Brave
     # damage = @offense - monster.defense
     # モンスターのhpから計算したダメージを引く
     # 自己代入：monster.hpからdamageを引いた値をmonster.hpに代入
-    monster.hp -= damage
-    puts "#{monster.name}は#{damage}のダメージを受けた"
+    target.hp -= damage
+    puts "#{target.name}は#{damage}のダメージを受けた"
   end
 
   def calculate_special_attack
@@ -139,19 +139,33 @@ class Monster
 
       puts "#{@name}の攻撃"
       
-      # 勇者に与えるダメージの計算
-      damage = @offense - brave.defense
+      # ダメージ計算処理の呼び出し
+      damage = calculate_damage(brave)
       
-      # 勇者クラスのHPにダメージを反映
-      brave.hp -= damage
-      
-      puts "#{brave.name}は#{damage}のダメージを受けた"
+      # ダメージ反映処理の呼び出し
+      cause_damage(target:brave, damage:damage)
+     
       puts "#{brave.name}の残りHPは#{brave.hp}だ"
     end
 
     # クラス外から呼び出せないようにする
     private
-    
+
+    # ダメージ計算処理
+    def calculate_damage(target)
+      @offense - target.defense
+    end
+
+    # ダメージ反映処理
+    def cause_damage(**params)
+      damage = params[:damage]
+      target = params[:target]
+      
+      target.hp -= damage
+      
+      puts "#{target.name}は#{damage}のダメージを受けた"
+    end
+
     # 変身メソッドの定義
     def transform
       # 変身後の名前
@@ -175,6 +189,7 @@ class Monster
   brave = Brave.new(name:"テリー", hp:500, offense:150, defense:100)
   # ハッシュ形式でデータを渡すのでどういうデータを渡しているのか把握しやすくなる
   monster = Monster.new(name:"スライム", hp:250, offense:200, defense:100)
-  
-  brave.attack(monster)
-  monster.attack(brave)
+  loop do
+    brave.attack(monster)
+    monster.attack(brave)
+  end
