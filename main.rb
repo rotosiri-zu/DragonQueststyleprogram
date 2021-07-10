@@ -10,14 +10,14 @@ class Character
   end
 end
 
-class Brave
+class Brave < Character
 
   #attr_readerの記載でゲッターを省略することができる
   # 複数の値を同時に指定することができる
-  attr_reader :name, :offense, :defense
+  # attr_reader :name, :offense, :defense
   # attr_writerでセッターを定義
   # セッターゲッターを一括定義
-  attr_accessor :hp
+  # attr_accessor :hp
 
   # 必殺攻撃の計算に使う定数
   SPECIAL_ATTACK_CONSTANT = 1.5
@@ -25,13 +25,13 @@ class Brave
   # initializeメソッドを定義
   #paramsで一括で受け取る
   #引数に**を記載:ハッシュしか受け取れなくなる
-  def initialize(**params)
+  # def initialize(**params)
     #各パラメータをハッシュで取得
-    @name = params[:name]
-    @hp = params[:hp]
-    @offense = params[:offense]
-    @defense = params[:defense]
-  end
+  #   @name = params[:name]
+  #   @hp = params[:hp]
+  #   @offense = params[:offense]
+  #   @defense = params[:defense]
+  # end
 
   # 攻撃処理を実装するメソッド
   # 引数でモンスタークラスのインスタンスを受け取る
@@ -100,7 +100,7 @@ class Brave
     # モンスターのhpから計算したダメージを引く
     # 自己代入：monster.hpからdamageを引いた値をmonster.hpに代入
     target.hp -= damage
-    
+
     # もしターゲットのHPがマイナスになるなら0を代入
     target.hp = 0 if target.hp < 0
 
@@ -117,13 +117,13 @@ class Brave
 
 end
 
-class Monster
+class Monster < Character
   # 値の取り出し飲み可能
   # attr_readerにnameを削除
-  attr_reader :offense, :defense
+  # attr_reader :offense, :defense
   # 値の代入・取り出しが可能
   # attr_accessorにnameを追加
-  attr_accessor :hp, :name
+  # attr_accessor :hp, :name
 
   POWER_UP_RATE = 1.5
   # HPの半分の値を計算する定数
@@ -131,18 +131,26 @@ class Monster
 
   # **paramsにすることでハッシュ形式の引数しか受け付けないようにできる
   def initialize(**params)
-    @name = params[:name]
-    @hp = params[:hp]
-    @offense = params[:offense]
-    @defense = params[:defense]
+    # @name = params[:name]
+    # @hp = params[:hp]
+    # @offense = params[:offense]
+    # @defense = params[:defense]
 
+    # キャラクタークラスのinitializeメソッドに処理を渡す
+    # 通常のメソッドと同様に引数を渡すことができる
+    super(
+      name: params[:name],
+      hp: params[:hp],
+      offense: params[:offense],
+      defense: params[:defense]
+    )
+
+    # 親クラスで定義してない処理はそのままそのまま残す
     # モンスターが変身したかどうかを判定するフラグ
     @transform_flag = false
-
     # 変身する際の閾値(トリガー)を計算
     # 定数を使用
     @trigger_of_transform = params[:hp] * CALC_HALF_HP
-
   end
   
   def attack(brave)
