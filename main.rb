@@ -100,9 +100,10 @@ class Brave
     # モンスターのhpから計算したダメージを引く
     # 自己代入：monster.hpからdamageを引いた値をmonster.hpに代入
     target.hp -= damage
-
+    
     # もしターゲットのHPがマイナスになるなら0を代入
     target.hp = 0 if target.hp < 0
+
 
     puts "#{target.name}は#{damage}のダメージを受けた"
   end
@@ -216,7 +217,6 @@ class Monster
     break if monster.hp <= 0
 
     monster.attack(brave)
-
     # 勇者のHPが0以下になったら無限ループを終了させる
     # 1行で記述
     break if brave.hp <= 0
