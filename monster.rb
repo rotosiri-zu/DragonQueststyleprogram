@@ -45,7 +45,7 @@ class Monster < Character
         transform
       end
 
-      puts "#{@name}の攻撃"
+      # puts "#{@name}の攻撃"
       
       # ダメージ計算処理の呼び出し
       damage = calculate_damage(brave)
@@ -53,7 +53,10 @@ class Monster < Character
       # ダメージ反映処理の呼び出し
       cause_damage(target:brave, damage:damage)
      
-      puts "#{brave.name}の残りHPは#{brave.hp}だ"
+      # attack_messageの呼び出し
+      attack_message
+      
+      # puts "#{brave.name}の残りHPは#{brave.hp}だ"
     end
 
     # クラス外から呼び出せないようにする
@@ -74,7 +77,7 @@ class Monster < Character
       # もしターゲットのHPがマイナスになるなら0を代入
       target.hp = 0 if target.hp < 0
 
-      puts "#{target.name}は#{damage}のダメージを受けた"
+      # puts "#{target.name}は#{damage}のダメージを受けた"
     end
 
     # 変身メソッドの定義
@@ -83,10 +86,10 @@ class Monster < Character
       transform_name = "ドラゴン"
 
       # 変身メッセージ
-      puts <<~EOS
-      #{@name}は怒っている
-      #{@name}は#{transform_name}に変身した
-      EOS
+      # puts <<~EOS
+      # #{@name}は怒っている
+      # #{@name}は#{transform_name}に変身した
+      # EOS
 
       # モンスターの攻撃力を1.5倍にする
        # 代入演算子で計算

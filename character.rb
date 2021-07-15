@@ -1,4 +1,9 @@
+require'./message_dialog'
+
 class Character
+  # MessageDialogのインクルード
+  include MessageDialog
+
   attr_reader :offense, :defense
   attr_accessor :hp, :name
 

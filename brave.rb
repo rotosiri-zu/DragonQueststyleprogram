@@ -28,8 +28,8 @@ class Brave < Character
   def attack(monster)
    # @offense:勇者インスタンスの攻撃力
    # monster.defeense:モンスターインスタンスの防御力
-   
-   puts "#{@name}の攻撃"
+
+  #  puts "#{@name}の攻撃"
 
    # decision_attack_typeメソッドの呼び出し
    attack_type = decision_attack_type
@@ -42,9 +42,12 @@ class Brave < Character
    # キーワード引数を設定
    cause_damage(target:monster, damage:damage)
 
+   # attack_messageの呼び出し
+   # attack_typeを引数に渡す
+   attack_message(attack_type:attack_type)
+
     # メッセージを追記
-    # puts "#{monster.name}は#{damage}のダメージを受けた"
-    puts "#{monster.name}の残りHPは#{monster.hp}だ"
+    # puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
 
   # ここから下のメソッドをprivateメソッドにする
@@ -55,10 +58,10 @@ class Brave < Character
     attack_num = rand(4)
   
     if attack_num == 0
-      puts "必殺攻撃"
+      # puts "必殺攻撃"
       "special_attack"
     else
-      puts "通常攻撃"
+      # puts "通常攻撃"
       "normal_attac"
     end
   end
@@ -95,7 +98,7 @@ class Brave < Character
     target.hp = 0 if target.hp < 0
 
 
-    puts "#{target.name}は#{damage}のダメージを受けた"
+    # puts "#{target.name}は#{damage}のダメージを受けた"
   end
 
   def calculate_special_attack
