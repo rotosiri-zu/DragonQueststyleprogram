@@ -51,12 +51,13 @@ class Monster < Character
       damage = calculate_damage(brave)
       
       # ダメージ反映処理の呼び出し
-      cause_damage(target:brave, damage:damage)
+      cause_damage(target:brave,damage:damage)
      
       # attack_messageの呼び出し
       attack_message
-      
-      # puts "#{brave.name}の残りHPは#{brave.hp}だ"
+
+      # damage_messageを呼び出す
+      damage_message(target:brave,damage:damage)
     end
 
     # クラス外から呼び出せないようにする

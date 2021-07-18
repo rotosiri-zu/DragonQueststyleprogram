@@ -40,14 +40,14 @@ class Brave < Character
 
    # ダメージをHPに反映させる
    # キーワード引数を設定
-   cause_damage(target:monster, damage:damage)
+   cause_damage(target:monster,damage:damage)
 
    # attack_messageの呼び出し
    # attack_typeを引数に渡す
    attack_message(attack_type:attack_type)
 
-    # メッセージを追記
-    # puts "#{monster.name}の残りHPは#{monster.hp}だ"
+   # damage_messageを呼び出す
+   damage_message(target:monster,damage:damage)
   end
 
   # ここから下のメソッドをprivateメソッドにする
