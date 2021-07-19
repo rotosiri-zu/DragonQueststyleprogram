@@ -1,4 +1,9 @@
+require './message_dialog'
+
 class GamesController
+
+  # MessageDialogモジュールのinclude
+  include MessageDialog
 
   EXP_CONSTANT = 2
   GOLD_CONSTANT = 3
@@ -54,17 +59,10 @@ private
 
   # 勇者の勝敗によりメッセージを変更する
   def battle_judgment
-    # brave_win?を呼び出す
-    if brave_win? #引数が必要なくなる
-      result = calculate_of_exp_and_gole #引数が必要なくなる
-      # インスタンス変数に変更
-      # puts "#{@brave.name}はたたかいに勝った"
-      # puts "#{result[:exp]}の経験値と#{result[:gold]}ゴールドを獲得した"
-    else
-      # インスタンス変数に変更
-      # puts "#{@brave.name}は戦いに負けた"
-      # puts "目の前が真っ暗になった"
-    end
+    result = calculate_of_exp_and_gole #引数が必要なくなる
+     
+    # end_messageを呼び出す
+    end_message(result)
   end
   # 経験値とゴールドの計算
   # 引数が必要なくなる
