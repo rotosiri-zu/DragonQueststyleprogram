@@ -54,7 +54,7 @@ class Monster < Character
       cause_damage(target:brave,damage:damage)
      
       # attack_messageの呼び出し
-      attack_message
+      attack_message(target:brave)
 
       # damage_messageを呼び出す
       damage_message(target:brave,damage:damage)
@@ -86,12 +86,8 @@ class Monster < Character
       # 変身後の名前
       transform_name = "ドラゴン"
 
-      # 変身メッセージ
-      # puts <<~EOS
-      # #{@name}は怒っている
-      # #{@name}は#{transform_name}に変身した
-      # EOS
-
+      # transform_messageを呼び出し
+      transform_message(origin_name:@name,transform_name:transform_name)
       # モンスターの攻撃力を1.5倍にする
        # 代入演算子で計算
       @offense * POWER_UP_RATE

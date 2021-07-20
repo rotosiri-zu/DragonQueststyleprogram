@@ -67,10 +67,16 @@ private
   # 経験値とゴールドの計算
   # 引数が必要なくなる
   def calculate_of_exp_and_gole
-    exp = (@monster.offense + @monster.defense) * EXP_CONSTANT
-    gole = (@monster.offense + @monster.defense) * GOLD_CONSTANT
-    result = {exp:exp,gold:gole}
+    if brave_win?
+      brave_win_flag = true
+      exp = (@monster.offense + @monster.defense) * EXP_CONSTANT
+      gold = (@monster.offense + @monster.defense) * GOLD_CONSTANT
+    else
+      brave_win_flag = false
+      exp = 0
+      gold = 0
+    end
 
-    result
+    {brave_win_flag:brave_win_flag,exp:exp,gold:gold}
   end
 end
